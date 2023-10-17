@@ -1,0 +1,26 @@
+{
+  "name": "crypto-crate-smart-contract",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "console": "./node_modules/.bin/truffle console",
+    "deploy": "./node_modules/.bin/truffle deploy",
+    "compile": "./node_modules/.bin/truffle compile",
+    "migrate": "./node_modules/.bin/truffle migrate",
+    "test": "./node_modules/.bin/truffle test"
+  },
+  "keywords": [
+    "crypto-crate",
+    "smart contract",
+    "polygon",
+    "blockchain"
+  ],
+  "author": "Keiber Urbila <keiberup.dev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.15",
+    "dotenv": "^16.3.1",
+    "truffle": "5.11.5"
+  }
+}
