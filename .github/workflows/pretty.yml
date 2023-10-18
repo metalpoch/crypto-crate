@@ -1,0 +1,44 @@
+name: Pretty Code 🎀
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+    
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        
+      - name: Install Node.js dependencies
+        run: |
+          npm i -g prettier
+          
+      - name: Format with prettier
+        run: |
+          prettier --write "**/{*.jsx,*.js,*.tsx,*.ts,*.css}"
+          
+      - name: Check for changes
+        id: changes
+        run: |
+          if [[ $(git status --porcelain) ]]; then
+            echo "is_formatted=true" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Create Pull Request
+        if: steps.changes.outputs.is_formatted == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: "code-formated-by-prettier-using-github-actions"
+          labels: |
+            prettier
+            automated pr
+          token: ${{ secrets.PULL_REQUEST_ACTION }}
+          title: "Code Formated 🤖 BeepBoop"
+          commit-message: "style(🤖): 🎨 scripts formated with Prettier"
+          body: |
+            There seems to be some formatting issues with this pull request. I have auto formatted the code using Prettier. Review the changes and merge this pull request if that's okay with you.
