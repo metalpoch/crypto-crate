@@ -1,0 +1,29 @@
+<div id="canvas" class="w-[300px] h-[300px]"></div>
+
+<script>
+    import * as THREE from "three";
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 100);
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(300, 300);
+    renderer.setClearColor(0xffffff, 0);
+    const canvas = document.getElementById("canvas");
+    if (canvas !== null) {
+        canvas.appendChild(renderer.domElement);
+    }
+    const geometry = new THREE.BoxGeometry(3, 3, 3);
+    const edges = new THREE.EdgesGeometry(geometry);
+    const material = new THREE.LineBasicMaterial({ color: 0xffffff });
+    const cube = new THREE.LineSegments(edges, material);
+    scene.add(cube);
+    camera.position.z = 5;
+    function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
