@@ -4,7 +4,7 @@ import { MdMoneyOff, MdOutlineHistory } from 'react-icons/md'
 
 export default function Features() {
     return <>
-        <section className='mb-20 flex flex-col justify-center items-center mx-4'>
+        <section className='mb-32 flex flex-col justify-center items-center mx-4'>
             <h1 className='text-4xl mb-5 font-bold'>Discover our features</h1>
             <h3 className='mb-20 text-2xl'>
                 Our features are designed to enhance your productivity and streamline
