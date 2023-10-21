@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+
+import heroImage1 from "../images/hero-image-1.jpg";
+import heroImage2 from "../images/hero-image-2.jpg";
+import heroImage3 from "../images/hero-image-3.jpg";
+import heroImage4 from "../images/hero-image-4.jpg";
+import heroImage5 from "../images/hero-image-5.jpg";
+---
+
+<section class="mb-20 flex justify-center">
+    <div
+        class="lg:flex justify-around items-center gap-x-4 hidden max-w-screen-2xl"
+    >
+        <div>
+            <Image
+                class="w-48 rounded-lg bg-cover"
+                src={heroImage1}
+                alt="hero image 1"
+            />
+        </div>
+        <div>
+            <Image
+                class="w-48 rounded-lg"
+                src={heroImage2}
+                alt="hero image 2"
+            />
+        </div>
+        <div>
+            <Image
+                class="w-48 rounded-lg bg-cover"
+                src={heroImage3}
+                alt="hero image 3"
+            />
+        </div>
+        <div>
+            <Image
+                class="w-48 rounded-lg"
+                src={heroImage4}
+                alt="hero image 4"
+            />
+        </div>
+        <div>
+            <Image
+                class="w-48 rounded-lg"
+                src={heroImage5}
+                alt="hero image 5"
+            />
+        </div>
+    </div>
+    <div class="lg:hidden relative w-[500px] h-[500px] mx-4">
+        <div class="absolute top-10">
+            <Image
+                class="w-48 rounded-lg bg-cover"
+                src={heroImage1}
+                alt="hero image 1"
+            />
+        </div>
+        <div class="absolute left-32 z-10">
+            <Image
+                class="w-48 rounded-lg"
+                src={heroImage2}
+                alt="hero image 2"
+            />
+        </div>
+        <div class="absolute right-10 top-20">
+            <Image
+                class="w-48 rounded-lg"
+                src={heroImage4}
+                alt="hero image 4"
+            />
+        </div>
+    </div>
+</section>
