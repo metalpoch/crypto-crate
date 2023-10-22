@@ -19,6 +19,7 @@
   "author": "Keiber Urbila <keiberup.dev@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
     "@truffle/hdwallet-provider": "^2.1.15",
     "dotenv": "^16.3.1",
     "truffle": "5.11.5"

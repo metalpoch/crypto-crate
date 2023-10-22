@@ -1,8 +1,8 @@
- require('dotenv').config();
- const mnemonic = process.env["MNEMONIC"];
- const infuraProjectId = process.env["INFURA_PROJECT_ID"];
+require("dotenv").config();
+const mnemonic = process.env["MNEMONIC"];
+const infuraProjectId = process.env["INFURA_PROJECT_ID"];
 
- const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
   /**
@@ -16,25 +16,20 @@ module.exports = {
    */
 
   networks: {
-     development: {
-      host: "127.0.0.1",     // Localhost
-      port: 7545,            // Ganache Port
-      network_id: "*",    // Ganache Network ID
-     },
+    development: {
+      host: "127.0.0.1", // Localhost
+      port: 7545, // Ganache Port
+      network_id: "*", // Ganache Network ID
+    },
 
-    //matic: {
-      //provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com`),
-      //network_id: 80001,
-      //confirmations: 2,
-      //timeoutBlocks: 200,
-      //skipDryRun: true
-    //},
-
-    // goerli: {
-    //   provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/${infuraProjectId}`),
-    //   network_id: 5,       // Goerli's id
-    //   chain_id: 5
-    // }
+    matic: {
+      provider: () =>
+        new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com`),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
   },
 
   // Set default mocha options here, use special reporters etc.
@@ -45,7 +40,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.13",      // Fetch exact version from solc-bin
-    }
-  }
+      version: "0.8.19",
+    },
+  },
 };
