@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@openzeppelin/contracts':
+    specifier: ^5.0.0
+    version: 5.0.0
   '@truffle/hdwallet-provider':
     specifier: ^2.1.15
     version: 2.1.15(@babel/core@7.23.2)
@@ -1001,6 +1004,10 @@ packages:
 
   /@noble/secp256k1@1.6.3:
     resolution: {integrity: sha512-T04e4iTurVy7I8Sw4+c5OSN9/RkPlo1uKxAomtxQNLq8j1uPAqnsqG1bqvY3Jv7c13gyr6dui0zmh/I3+f/JaQ==}
+    dev: false
+
+  /@openzeppelin/contracts@5.0.0:
+    resolution: {integrity: sha512-bv2sdS6LKqVVMLI5+zqnNrNU/CA+6z6CmwFXm/MzmOPBRSO5reEJN7z0Gbzvs0/bv/MZZXNklubpwy3v2+azsw==}
     dev: false
 
   /@protobufjs/aspromise@1.1.2:
