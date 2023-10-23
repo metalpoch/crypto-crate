@@ -1,0 +1,131 @@
+import { useStore } from "@nanostores/react";
+import { currentAccount } from "../store/wallet";
+import crateContract from "../utils/crateContract";
+
+export default function Navbar() {
+  const $currentAccount = useStore(currentAccount);
+  const { ethereum } = window;
+
+  const checkWalletIsConnected = async () => {
+    const accounts = await ethereum.request({ method: "eth_accounts" });
+    accounts.length > 0 && currentAccount.set(accounts[0]);
+  };
+
+  checkWalletIsConnected();
+
+  const handleConnect = async () => {
+    if (!ethereum) {
+      alert("Error al iniciar metamask");
+    }
+    try {
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      currentAccount.set(accounts[0]);
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  const showCrates = async (id) => {
+    const data = await crateContract.get(ethereum, id);
+    console.log(data);
+  };
+
+  const showCratesByWallet = async (wallet) => {
+    const data = await crateContract.getMany(ethereum, wallet);
+    console.log(data);
+  };
+
+  const newCrate = async (newCrate) => {
+    const data = await crateContract.create(ethereum, newCrate);
+    console.log(data);
+  };
+
+  const buyCrate = async (gwei, recipient, id) => {
+    const data = await crateContract.buy(ethereum, gwei, recipient, id);
+    console.log(data);
+  };
+
+  return (
+    <header>
+      <nav className="p-8 flex justify-between items-center">
+        <div className="flex gap-x-20 items-center">
+          <a className="text-2xl font-bold" href="/">
+            Crypto Crates
+          </a>
+          <input
+            className="rounded-full bg-zinc-700 px-8 py-3 w-[400px] hidden lg:block"
+            placeholder="Search..."
+            type="text"
+          />
+        </div>
+        <div className="flex gap-x-8 items-center">
+          <div className="lg:flex gap-x-10 text-lg hidden">
+            <a href="/">Explore</a>
+            <a href="/">Collections</a>
+            <a href="/">Gallery</a>
+          </div>
+          <div className="flex gap-x-4">
+            <button className="border px-8 py-3 rounded-full hidden lg:block">
+              Whatever
+            </button>
+            {$currentAccount ? (
+              <button
+                className="px-8 py-3 rounded-full bg-purple-700"
+                onClick={() => alert("keloke")}
+              >
+                Mint Crate
+              </button>
+            ) : (
+              <button
+                className="px-8 py-3 rounded-full bg-blue-700"
+                onClick={() => handleConnect()}
+              >
+                Connect wallet
+              </button>
+            )}
+          </div>
+        </div>
+      </nav>
+      <button onClick={() => showCrates(0)}>Ver genesis</button>
+      <br />
+      <br />
+      <button
+        onClick={() =>
+          newCrate([
+            "Arte generado por IA 2",
+            "Imagen generada por leonardo.ai 2",
+            "https://cdn.leonardo.ai/users/26957480-b1ab-48a5-a7ed-68361614ec37/generations/589c39d2-7c68-4f64-b4f4-0f79970eb028/Leonardo_Diffusion_XL_crypto_crate_logo_cyber_punk_1.jpg?w=512",
+            false,
+            13000,
+            true,
+          ])
+        }
+      >
+        Agregar
+      </button>
+      <br />
+      <br />
+      <button onClick={() => showCrates(1)}>ver nuevo</button>
+      <br />
+      <br />
+      <button
+        onClick={() =>
+          showCratesByWallet("0x30485c0fDC98b7DeE9709ec6FAE5df45F04d603e")
+        }
+      >
+        datos
+      </button>
+      <br />
+      <br />
+      <button
+        onClick={() =>
+          buyCrate("130", "0x30485c0fDC98b7DeE9709ec6FAE5df45F04d603e", 2)
+        }
+      >
+        Comprar
+      </button>
+    </header>
+  );
+}
