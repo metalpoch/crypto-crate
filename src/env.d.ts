@@ -7,3 +7,7 @@ declare global {
     ethereum?:MetaMaskInpageProvider
   }
 }
+
+interface ethers {
+    providers?: any;
+}
