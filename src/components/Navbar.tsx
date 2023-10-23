@@ -2,12 +2,39 @@ import logo from "../images/crypto-crates-logo-light.svg";
 import { useState } from "react";
 import { HiMenu } from "react-icons/hi"
 
+import { useStore } from "@nanostores/react";
+import { currentAccount } from "../store/wallet";
+
 export default function Navbar() {
     const [menuVisible, setMenuVisible] = useState(false);
+    const $currentAccount = useStore(currentAccount);
+    const { ethereum } = window;
 
     function toggleMenu() {
         setMenuVisible(!menuVisible)
     }
+
+
+    const checkWalletIsConnected = async () => {
+        const accounts = await ethereum.request({ method: "eth_accounts" });
+        accounts.length > 0 && currentAccount.set(accounts[0]);
+    };
+
+    checkWalletIsConnected();
+
+    const handleConnect = async () => {
+        if (!ethereum) {
+            alert("Error al iniciar metamask");
+        }
+        try {
+            const accounts = await ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            currentAccount.set(accounts[0]);
+        } catch (err) {
+            console.warn(err);
+        }
+    };
 
     return <header className="lg:px-20 lg:py-5">
         <nav className="p-8 flex justify-between items-center">
@@ -33,9 +60,19 @@ export default function Navbar() {
                     <a href="/">Gallery</a>
                 </div>
                 <div className="flex gap-x-4">
-                    <button
-                        className="px-8 py-3 hidden lg:block rounded-full bg-blue-700 hover:bg-blue-800"
-                    >Connect wallet</button>
+                    {$currentAccount ?
+                        (
+                            <button
+                                onClick={() => handleConnect()}
+                                className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
+                            >Mint Crate</button>
+                        ) : (
+                            <button
+                                onClick={() => handleConnect()}
+                                className="px-8 py-3 hidden lg:block rounded-full bg-blue-700 hover:bg-blue-800"
+                            >Connect wallet</button>
+                        )
+                    }
                     <select
                         className="border px-4 py-3 rounded-full hidden bg-zinc-900 text-white lg:block"
                     >
@@ -54,9 +91,19 @@ export default function Navbar() {
                 <a href="/">Explore</a>
                 <a href="/">Collections</a>
                 <a href="/">Gallery</a>
-                <button className="px-8 py-3 mt-4 rounded-full bg-blue-700 hover:bg-blue-800">
-                    Connect wallet
-                </button>
+                {$currentAccount ?
+                    (
+                        <button
+                            onClick={() => handleConnect()}
+                            className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
+                        >Mint Crate</button>
+                    ) : (
+                        <button
+                            onClick={() => handleConnect()}
+                            className="px-8 py-3 hidden lg:block rounded-full bg-blue-700 hover:bg-blue-800"
+                        >Connect wallet</button>
+                    )
+                }
             </div>
         }
     </header>
