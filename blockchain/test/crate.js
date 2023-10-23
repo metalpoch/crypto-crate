@@ -21,18 +21,18 @@ contract("CrateContract", () => {
     assert.equal(
       genesis.title,
       "Genesis",
-      "the title of the 'genesis' crate is not the corresponding one"
+      "the title of the 'genesis' crate is not the corresponding one",
     );
     assert.equal(genesis.premium, true, "'genesis' crate must be premium");
     assert.equal(
       genesis.isSalable,
       false,
-      "the 'genesis' crate cannot be salable"
+      "the 'genesis' crate cannot be salable",
     );
     assert.equal(
       genesis.amount.toNumber(),
       genesis.id.toNumber(),
-      "the 'genesis' crate must have the same cost as the index"
+      "the 'genesis' crate must have the same cost as the index",
     );
   });
 
@@ -43,7 +43,7 @@ contract("CrateContract", () => {
       "Also URL",
       false,
       0,
-      false
+      false,
     );
     const counter = await this.crateContract.crateCounter();
     const infoCrate = await crate.logs[0].args;
@@ -66,7 +66,7 @@ contract("CrateContract", () => {
       "https://pochland.com.ve/assets/KeiberUrbila.webp",
       true,
       999999000000000,
-      true
+      true,
     );
 
     const infoCrate = crate.logs[0].args;
@@ -75,11 +75,11 @@ contract("CrateContract", () => {
     assert.equal(infoCrate.title, "Pixel Art");
     assert.equal(
       infoCrate.description,
-      "Pixel Art de Keiber usado en https://pochland.com.ve"
+      "Pixel Art de Keiber usado en https://pochland.com.ve",
     );
     assert.equal(
       infoCrate.imageUrl,
-      "https://pochland.com.ve/assets/KeiberUrbila.webp"
+      "https://pochland.com.ve/assets/KeiberUrbila.webp",
     );
     assert.equal(infoCrate.premium, true);
     assert.equal(infoCrate.amount, 999999000000000);
@@ -94,11 +94,11 @@ contract("CrateContract", () => {
     assert.equal(crate.title, "Pixel Art");
     assert.equal(
       crate.description,
-      "Pixel Art de Keiber usado en https://pochland.com.ve"
+      "Pixel Art de Keiber usado en https://pochland.com.ve",
     );
     assert.equal(
       crate.imageUrl,
-      "https://pochland.com.ve/assets/KeiberUrbila.webp"
+      "https://pochland.com.ve/assets/KeiberUrbila.webp",
     );
     assert.equal(crate.premium, true);
     assert.equal(crate.amount, 999999000000000);
