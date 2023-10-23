@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar.jsx";
 import Cube from "../components/Cube.astro";
 import ImagesList from "../components/ImageList";
 import { type Image } from "../types/Image";
+import supabase from "../db/conectionDB";
 
 const images: Array<Image> = [
   { id: 1, url: "https://picsum.photos/id/27/200/300" },
