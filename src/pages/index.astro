@@ -1,41 +1,45 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.jsx";
+// import Navbar from "../components/Navbar.jsx";
 import Cube from "../components/Cube.astro";
-import ImagesList from "../components/ImageList";
-import { type Image } from "../types/Image";
-import supabase from "../db/conectionDB";
-
-const images: Array<Image> = [
-  { id: 1, url: "https://picsum.photos/id/27/200/300" },
-  { id: 2, url: "https://picsum.photos/id/28/200/300" },
-  { id: 3, url: "https://picsum.photos/id/29/200/300" },
-  { id: 4, url: "https://picsum.photos/id/26/200/300" },
-  { id: 5, url: "https://picsum.photos/id/23/200/300" },
-];
+import HeroImages from '../components/HeroImages.astro'
+import Navbar from "../components/Navbar";
+import Features from "../components/Features";
+import Footer from "../components/Footer";
 ---
 
 <Layout title="Crypto Crates - Home">
-  <main>
-    <Navbar client:only="react" />
-
-    <section
-      class="flex flex-col lg:flex-row justify-center items-center gap-x-10 mt-28 px-4 lg:px-40 mb-20"
-    >
-      <div class="inline-flex flex-col mr-20">
-        <div
-          class="flex justify-center items-center rounded-full bg-zinc-600 px-8 py-2 w-[200px] mb-5"
-        >
-          <p>Discover NFT</p>
-        </div>
-        <h1 class="text-7xl mb-5 w-[400px]">Ready to get started?</h1>
-        <p class="text-zinc-300 text-lg">Explore, sell and create your NFTs.</p>
-      </div>
-      <Cube />
-    </section>
-
-    <section>
-      <ImagesList images={images} />
-    </section>
-  </main>
+	<main>
+		<Navbar client:only="react" />
+		<section
+			class="flex flex-col lg:flex-row justify-center px-3 items-center lg:gap-x-10 mt-28 lg:px-40 mb-20"
+		>
+			<div class="w-auto lg:mr-20">
+				<div
+					class="flex justify-center items-center rounded-full bg-zinc-600 px-8 py-2 w-[200px] mb-5"
+				>
+					<p>Secure your assets</p>
+				</div>
+				<h1 class="text-5xl lg:text-7xl mb-5 w-[400px]">
+					Ready to get started?
+				</h1>
+				<p class="text-zinc-300 text-lg">
+					Digitalize, classify
+					<br />
+					 and verify products with us
+				</p>
+			</div>
+			<Cube />
+		</section>
+		<HeroImages />
+		<Features />
+		<Footer client:only="react" />
+	</main>
 </Layout>
+
+<style is:global>
+	select {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+</style>

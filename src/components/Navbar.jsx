@@ -1,5 +1,6 @@
 import { useStore } from "@nanostores/react";
 import { currentAccount } from "../store/wallet";
+import ConnectWallet from "./ConnectWallet";
 
 export default function Navbar() {
   const $currentAccount = useStore(currentAccount);
@@ -57,12 +58,7 @@ export default function Navbar() {
                 Mint Crate
               </button>
             ) : (
-              <button
-                className="px-8 py-3 rounded-full bg-blue-700"
-                onClick={() => handleConnect()}
-              >
-                Connect wallet
-              </button>
+              <ConnectWallet />
             )}
           </div>
         </div>
