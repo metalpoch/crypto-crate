@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity >=0.8.19 <0.9.0;
+
+import "./Tools.sol";
 
 contract CrateContract {
     uint256 public crateCounter;
@@ -7,6 +9,7 @@ contract CrateContract {
     event ViewCrate(
         uint256 id,
         string title,
+        string category,
         string description,
         string imageUrl,
         bool premium,
@@ -21,6 +24,7 @@ contract CrateContract {
     struct Crate {
         uint256 id;
         string title;
+        string category;
         string description;
         string imageUrl;
         bool premium;
@@ -38,6 +42,7 @@ contract CrateContract {
         crates[crateCounter] = Crate(
             crateCounter,
             "Genesis",
+            "Smart Contract",
             "The first crate",
             "https://github.com/metalpoch/crypto-crate",
             true,
@@ -53,6 +58,7 @@ contract CrateContract {
 
     function createCrate(
         string memory _title,
+        string memory _category,
         string memory _description,
         string memory _imageUrl,
         bool _premium,
@@ -62,6 +68,7 @@ contract CrateContract {
         crates[crateCounter] = Crate(
             crateCounter,
             _title,
+            _category,
             _description,
             _imageUrl,
             _premium,
@@ -77,6 +84,7 @@ contract CrateContract {
         emit ViewCrate(
             crateCounter,
             _title,
+            _category,
             _description,
             _imageUrl,
             _premium,
@@ -92,6 +100,7 @@ contract CrateContract {
     function updateCrate(
         uint256 _id,
         string memory _title,
+        string memory _category,
         string memory _description,
         string memory _imageUrl,
         bool _premium,
@@ -104,6 +113,8 @@ contract CrateContract {
         );
 
         crates[_id].title = _title;
+        crates[_id].category = _category;
+
         crates[_id].description = _description;
         crates[_id].imageUrl = _imageUrl;
         crates[_id].premium = _premium;
@@ -114,6 +125,7 @@ contract CrateContract {
         emit ViewCrate(
             crateCounter,
             _title,
+            _category,
             _description,
             _imageUrl,
             _premium,
@@ -128,15 +140,17 @@ contract CrateContract {
 
     function buyCrate(address payable _recipient, uint256 _id) public payable {
         require(crates[_id].isSalable == true, "The crate is not for sale");
-        require(msg.value >= crates[_id].amount, "Insufficient amount");
+        require(msg.value == crates[_id].amount, "Insufficient amount");
 
         _recipient.transfer(crates[_id].amount);
         crates[_id].owner = msg.sender;
     }
 
-    function getCratesByOwner(
-        address _owner
-    ) public view returns (Crate[] memory) {
+    function getCratesByOwner(address _owner)
+        public
+        view
+        returns (Crate[] memory)
+    {
         uint256 count = 0;
         for (uint256 i = 0; i < crateCounter; i++) {
             if (crates[i].owner == _owner) {
@@ -155,4 +169,29 @@ contract CrateContract {
 
         return result;
     }
+
+    function getCratesByCategory(string memory _category)
+        public
+        view
+        returns (Crate[] memory)
+    {
+        uint256 count = 0;
+        for (uint256 i = 0; i < crateCounter; i++) {
+            if (Tools.stringComparator(crates[i].category, _category)) {
+                count++;
+            }
+        }
+
+        Crate[] memory result = new Crate[](count);
+        uint256 index = 0;
+        for (uint256 i = 0; i < crateCounter; i++) {
+            if (Tools.stringComparator(crates[i].category, _category)) {
+                result[index] = crates[i];
+                index++;
+            }
+        }
+
+        return result;
+    }
 }
+
