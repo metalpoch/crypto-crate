@@ -14,7 +14,6 @@ export default function Navbar() {
         setMenuVisible(!menuVisible)
     }
 
-
     const checkWalletIsConnected = async () => {
         const accounts = await ethereum.request({ method: "eth_accounts" });
         accounts.length > 0 && currentAccount.set(accounts[0]);
@@ -65,7 +64,7 @@ export default function Navbar() {
                             <button
                                 onClick={() => handleConnect()}
                                 className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
-                            >Mint Crate</button>
+                            >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(-4)}`}</button>
                         ) : (
                             <button
                                 onClick={() => handleConnect()}
@@ -94,9 +93,8 @@ export default function Navbar() {
                 {$currentAccount ?
                     (
                         <button
-                            onClick={() => handleConnect()}
                             className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
-                        >Mint Crate</button>
+                        >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(-4)}`}</button>
                     ) : (
                         <button
                             onClick={() => handleConnect()}

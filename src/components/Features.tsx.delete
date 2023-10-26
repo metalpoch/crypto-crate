@@ -2,6 +2,7 @@ import { FaLink, FaEthereum } from 'react-icons/fa'
 import { BsQrCode, BsBoundingBox } from 'react-icons/bs'
 import { MdMoneyOff, MdOutlineHistory } from 'react-icons/md'
 
+
 export default function Features() {
     return <>
         <section className='mb-32 flex flex-col justify-center items-center mx-4'>

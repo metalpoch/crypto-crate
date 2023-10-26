@@ -1,0 +1,57 @@
+---
+import LinkICon from "../components/icons/Link";
+import QRIcon from "../components/icons/QR";
+import DollarOffIcon from "../components/icons/DollarOff";
+import BlockchainIcon from "../components/icons/Blockchain";
+import RewindIcon from "../components/icons/RewindTime";
+import EthereumIcon from "../components/icons/Ethereum";
+// import { FaLink, FaEthereum } from 'react-icons/fa'
+//import { BsQrCode, BsBoundingBox } from 'react-icons/bs' -->
+import { MdMoneyOff, MdOutlineHistory } from 'react-icons/md'
+---
+
+<section class="mb-32 flex flex-col justify-center items-center mx-4">
+  <h1 class="text-4xl mb-5 font-bold">Discover our features</h1>
+  <h3 class="mb-20 text-2xl">
+    Our features are designed to enhance your productivity and streamline your
+    workflow.
+  </h3>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-20">
+    <div class="flex flex-col items-center gap-y-2">
+      <LinkICon />
+      <h3 class="font-bold text-2xl">Cryptografically secure</h3>
+      <p>Using Etherium blockchain technology</p>
+    </div>
+
+    <div class="flex flex-col items-center gap-y-2">
+      <EthereumIcon />
+      <h3 class="font-bold text-2xl">Guard by a smart contract</h3>
+      <p>Following ERC-721 standard</p>
+    </div>
+
+    <div class="flex flex-col items-center gap-y-2">
+        <QRIcon />
+      <h3 class="font-bold text-2xl">Share with others</h3>
+      <p>Show it to your clients</p>
+    </div>
+
+    <div class="flex flex-col items-center gap-y-2">
+        <DollarOffIcon />
+      <h3 class="font-bold text-2xl">Low fees</h3>
+      <p>Low entry barrier for adding a product to the collection</p>
+    </div>
+
+    <div class="flex flex-col items-center gap-y-2">
+        <BlockchainIcon />
+      <h3 class="font-bold text-2xl">Unique</h3>
+      <p>Give uniqueness to your product</p>
+    </div>
+
+    <div class="flex flex-col items-center gap-y-2">
+        <RewindIcon />
+      <h3 class="font-bold text-2xl">Leave a trace</h3>
+      <p>Have a item record at your hand</p>
+    </div>
+  </div>
+</section>
