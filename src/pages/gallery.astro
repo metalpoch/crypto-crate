@@ -1,19 +1,18 @@
 ---
 import { Product } from '../components/Gallery.jsx'
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.jsx'
 ---
 
 <Layout title='Gallery'>
-    <Navbar client:only="react" />
     <h1 class="text-center text-3xl font-bold my-10 bg-gradient-to-r from-purple-400 to-red-500 text-transparent bg-clip-text">Explore Gallery</h1>
     <section class="flex flex-wrap gap-5 justify-center mb-10">
-        <Product 
+        <!-- <Product 
         title=' Title',
         img='https://placehold.co/200x200',
         userImg="https://placehold.co/50x50",
         owner='owner'
-    />
+    /> -->
+        <Product client:visible />
     </section>
 </Layout>
 
