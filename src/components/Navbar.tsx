@@ -40,6 +40,10 @@ export default function Navbar() {
     }
   };
 
+  const handleRedirect = () => {
+    window.location.replace('/mint')
+  }
+
   return (
     <header className="lg:px-20 lg:py-5">
       <nav className="p-8 flex justify-between items-center">
@@ -69,7 +73,7 @@ export default function Navbar() {
           <div className="flex gap-x-4">
             {$currentAccount ? (
               <button
-                onClick={() => handleConnect()}
+                onClick={() => handleRedirect()}
                 className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
               >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
                 -4
@@ -100,7 +104,7 @@ export default function Navbar() {
           <a href="/">Collections</a>
           <a href="/">Gallery</a>
           {$currentAccount ? (
-            <button className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
+            <button onClick={() => handleRedirect()} className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
               0,
               3
             )}...${$currentAccount.slice(-4)}`}</button>
