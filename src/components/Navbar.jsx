@@ -27,6 +27,10 @@ export default function Navbar() {
     }
   };
 
+  const handleRedirect = () => {
+    window.location.replace('/mint')
+  }
+
   return (
     <header>
       <nav className="p-8 flex justify-between items-center">
@@ -53,7 +57,7 @@ export default function Navbar() {
             {$currentAccount ? (
               <button
                 className="px-8 py-3 rounded-full bg-purple-700"
-                onClick={() => alert("keloke")}
+                onClick={() => handleRedirect()}
               >
                 Mint Crate
               </button>
