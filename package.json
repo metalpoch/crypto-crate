@@ -26,9 +26,11 @@
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.11.0",
     "tailwindcss": "^3.0.24",
-    "three": "^0.157.0"
+    "three": "^0.157.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/three": "^0.157.2"
+    "@types/three": "^0.157.2",
+    "@types/uuid": "^9.0.6"
   }
 }
