@@ -1,4 +1,4 @@
-export default function EtheriumIcon() {
+export default function Etherium() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
