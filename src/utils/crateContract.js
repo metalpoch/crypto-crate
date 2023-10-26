@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import contract from "../contracts/CrateContract.json";
 
 const CONTRACT_ABI = contract.abi;
-const CONTRACT_ADDRESS = "0x6b980B88334a0004e31cAb45F6688254De37FDe4";
+const CONTRACT_ADDRESS = "0x9845969a4D04c8Caf9Fa06C2BEB1E1e2e420c7D3";
 
 const getContract = async (ethereum) => {
   const web3Provider = new ethers.BrowserProvider(ethereum);
@@ -38,12 +38,11 @@ export const update = async (ethereum, id, newValues) => {
   }
 };
 
-// ⚠️ HAY QUE SOLUCIONAR UN PROBLEMA CON MONTO ENVIADO PARA QUE ESTEN EN GWEI ⚠️
-export const buy = async (ethereum, gwei, recipient, id) => {
+export const buy = async (ethereum, ethers, recipient, id) => {
   if (ethereum) {
     const contract = await getContract(ethereum);
     const transaction = await contract.buyCrate(recipient, id, {
-      value: ethers.parseUnits(gwei, "gwei"),
+      value: ethers,
     });
     return await transaction.wait();
   }

@@ -1,45 +1,43 @@
 ---
 import Layout from "../layouts/Layout.astro";
-// import Navbar from "../components/Navbar.jsx";
 import Cube from "../components/Cube.astro";
-import HeroImages from '../components/HeroImages.astro'
-import Navbar from "../components/Navbar";
-import Features from "../components/Features";
+import HeroImages from "../components/HeroImages.astro";
+import Features from "../components/Features.astro";
 import Footer from "../components/Footer";
 ---
 
 <Layout title="Crypto Crates - Home">
-	<main>
-		<Navbar client:only="react" />
-		<section
-			class="flex flex-col lg:flex-row justify-center px-3 items-center lg:gap-x-10 mt-28 lg:px-40 mb-20"
-		>
-			<div class="w-auto lg:mr-20">
-				<div
-					class="flex justify-center items-center rounded-full bg-zinc-600 px-8 py-2 w-[200px] mb-5"
-				>
-					<p>Secure your assets</p>
-				</div>
-				<h1 class="text-5xl lg:text-7xl mb-5 w-[400px]">
-					Ready to get started?
-				</h1>
-				<p class="text-zinc-300 text-lg">
-					Digitalize, classify
-					<br />
-					 and verify products with us
-				</p>
-			</div>
-			<Cube />
-		</section>
-		<HeroImages />
-		<Features />
-		<Footer client:only="react" />
-	</main>
+  <main>
+    <section
+      class="flex flex-col lg:flex-row justify-center px-3 items-center lg:gap-x-10 mt-28 lg:px-40 mb-20"
+    >
+      <div class="w-auto lg:mr-20">
+        <div
+          class="flex justify-center items-center rounded-full bg-zinc-600 px-8 py-2 w-[200px] mb-5"
+        >
+          <p>Secure your assets</p>
+        </div>
+        <h1 class="text-5xl lg:text-7xl mb-5 w-[400px]">
+          Ready to get started?
+        </h1>
+        <p class="text-zinc-300 text-lg">
+          Digitalize, classify
+          <br />
+           and verify products with us
+        </p>
+      </div>
+      <Cube />
+    </section>
+    <HeroImages />
+    <Features />
+    <Footer client:only="react" />
+  </main>
 </Layout>
 
 <style is:global>
-	select {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-	}
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
 </style>
+../components/Features.tsx.delete
