@@ -1,3 +1,3 @@
 import { atom } from "nanostores";
 
-export const currentAccount = atom(null);
+export const currentAccount = atom("");

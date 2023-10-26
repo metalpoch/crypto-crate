@@ -1,4 +1,6 @@
 ---
+import Navbar from "../components/Navbar";
+
 interface Props {
   title: string;
 }
@@ -18,6 +20,7 @@ const { title } = Astro.props;
   </head>
   <!-- todo: agregar una font family -->
   <body class="bg-zinc-900 text-white">
+    <Navbar client:only="react" />
     <slot />
   </body>
 </html>
