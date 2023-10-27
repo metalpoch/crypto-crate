@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMany } from "../utils/crateContract";
-
-type Crate = {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  owner: string;
-};
+import type { Crate } from "../types/types";
 
 export default function CratesList() {
   const [crates, setCrates] = useState<Array<Crate>>();
@@ -19,8 +12,9 @@ export default function CratesList() {
       crates.push({
         id: Number(input[item][0]),
         title: input[item][1],
-        description: input[item][2],
-        imageUrl: input[item][3],
+        category: input[item][2],
+        description: input[item][3],
+        imageUrl: input[item][4],
         owner: input[item][5],
       });
     }

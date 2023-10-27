@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import { get } from "../utils/crateContract";
 import QRCode from "qrcode.react";
-
-type Crate = {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  owner: string;
-};
+import type { Crate } from "../types/types";
 
 export default function CrateDetails({ id }: { id: string | undefined }) {
   const [crate, setCrate] = useState<Crate | null>(null);
@@ -18,8 +11,9 @@ export default function CrateDetails({ id }: { id: string | undefined }) {
     const crate = {
       id: Number(input[0]),
       title: input[1],
-      description: input[2],
-      imageUrl: input[3],
+      category: input[2],
+      description: input[3],
+      imageUrl: input[4],
       owner: input[5],
     };
     return crate;

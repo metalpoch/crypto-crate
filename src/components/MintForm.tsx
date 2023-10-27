@@ -3,6 +3,7 @@ import { create as createCrate } from "../utils/crateContract";
 import { useDropzone } from "react-dropzone";
 import supabase from "../utils/supabase";
 import { v4 as uuidv4 } from "uuid";
+import { categories } from "../utils/categories";
 
 // import Dropzone from "./Dropzone";
 
@@ -43,6 +44,7 @@ export default function MintForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("1");
+  const [category, setCategory] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [premium, setPremium] = useState(false);
   const [isSalable, setIsSalable] = useState(false);
@@ -93,9 +95,9 @@ export default function MintForm() {
 
         const newCrate = [
           title,
+          category,
           description,
           image.publicUrl,
-          premium,
           amount,
           isSalable,
         ];
@@ -132,8 +134,8 @@ export default function MintForm() {
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
-          }),
-        ),
+          })
+        )
       );
     },
   });
@@ -173,6 +175,27 @@ export default function MintForm() {
           </section>
         </div>
         <form className="p-8 flex flex-col lg:w-[400px]" onSubmit={handleForm}>
+          <div className="mb-4">
+            <label
+              htmlFor="categories"
+              className="block mb-2 text-sm font-medium text-white"
+            >
+              Select an option
+            </label>
+            <select
+              id="categories"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option selected>Choose a category</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.name}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="mb-4">
             <label
               htmlFor="title"
