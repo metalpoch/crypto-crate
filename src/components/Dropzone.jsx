@@ -43,8 +43,8 @@ function Dropzone(props) {
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
-          })
-        )
+          }),
+        ),
       );
     },
   });
@@ -71,7 +71,10 @@ function Dropzone(props) {
 
   return (
     <section className="border border-white border-dashed rounded-lg h-[300px] lg:w-[300px]">
-      <div {...getRootProps({ className: "dropzone" })} className="h-[300px] w-full flex justify-center items-center">
+      <div
+        {...getRootProps({ className: "dropzone" })}
+        className="h-[300px] w-full flex justify-center items-center"
+      >
         <input {...getInputProps()} />
         <div className="text-center ">
           <p>Drag an image</p>

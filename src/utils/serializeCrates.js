@@ -1,4 +1,4 @@
-import { get } from './crateContract.js'
+import { get } from "./crateContract.js";
 function serializeCrates(input) {
   const crates = [];
   for (const item in input) {
@@ -10,10 +10,9 @@ function serializeCrates(input) {
       owner: input[item][5],
     });
   }
-  console.log(crates)
+  console.log(crates);
   return crates;
 }
 // despues la usas asi
 const results = await get(window.ethereum, wallet);
 export const serializedCrates = serializeCrates({ ...results });
-
