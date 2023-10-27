@@ -1,48 +1,44 @@
 import { useEffect, useState } from "react";
-import { getMany } from "../utils/crateContract";
-
-type Crate = {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  owner: string;
-};
+import { get as getCrate } from "../utils/crateContract";
+import type { Crate } from "../types/types";
 
 export default function Gallery() {
   const [crates, setCrates] = useState<Array<Crate>>();
   const { ethereum } = window;
 
-  function serializeCrates(input: any): Array<Crate> {
-    const crates: Array<Crate> = [];
-    for (const item in input) {
-      crates.push({
-        id: Number(input[item][0]),
-        title: input[item][1],
-        description: input[item][2],
-        imageUrl: input[item][3],
-        owner: input[item][5],
-      });
-    }
-    return crates;
+  function serializeCrate(input: any): Crate {
+    const crate = {
+      id: Number(input[0]),
+      title: input[1],
+      category: input[2],
+      description: input[3],
+      imageUrl: input[4],
+      owner: input[5],
+    };
+    return crate;
   }
 
   useEffect(() => {
     async function fetchCrates() {
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length > 0) {
-        const wallet = accounts[0];
-        const results = await getMany(window.ethereum, wallet);
-        const serializedCrates = serializeCrates({ ...results });
-        setCrates(serializedCrates);
+        const crates = [];
+        for (let i = 0; i < 20; i++) {
+          const crate = await getCrate(window.ethereum, i);
+          const sc = serializeCrate(crate);
+          if (sc.id !== 0) {
+            crates.push(sc);
+          }
+        }
+        setCrates(crates);
       }
     }
 
     fetchCrates();
   }, []);
 
-  function shortWallet(wallet:string){
-    return wallet.slice(0, 6) + "..."
+  function shortWallet(wallet: string) {
+    return wallet.slice(0, 6) + "...";
   }
 
   return (
@@ -87,4 +83,3 @@ export default function Gallery() {
     </div>
   );
 }
-
