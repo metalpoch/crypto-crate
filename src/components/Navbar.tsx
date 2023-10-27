@@ -1,6 +1,6 @@
 import logo from "../images/crypto-crates-logo-light.svg";
 import { useState } from "react";
-import MenuIcon from "./icons/Menu"
+import MenuIcon from "./icons/Menu";
 
 import { useStore } from "@nanostores/react";
 import { currentAccount } from "../store/wallet";
@@ -16,11 +16,10 @@ export default function Navbar() {
 
   const checkWalletIsConnected = async () => {
     const accounts = await ethereum.request({ method: "eth_accounts" });
-    if(accounts.length > 0) {
-        currentAccount.set(accounts[0]);
-    }
-    else {
-        currentAccount.set("");
+    if (accounts.length > 0) {
+      currentAccount.set(accounts[0]);
+    } else {
+      currentAccount.set("");
     }
   };
 
@@ -41,8 +40,8 @@ export default function Navbar() {
   };
 
   const handleRedirect = () => {
-    window.location.replace('/mint')
-  }
+    window.location.replace("/mint");
+  };
 
   return (
     <header className="lg:px-20 lg:py-5">
@@ -76,7 +75,7 @@ export default function Navbar() {
                 onClick={() => handleRedirect()}
                 className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
               >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
-                -4
+                -4,
               )}`}</button>
             ) : (
               <button
@@ -104,10 +103,12 @@ export default function Navbar() {
           <a href="/">Collections</a>
           <a href="/">Gallery</a>
           {$currentAccount ? (
-            <button onClick={() => handleRedirect()} className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
-              0,
-              3
-            )}...${$currentAccount.slice(-4)}`}</button>
+            <button
+              onClick={() => handleRedirect()}
+              className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
+            >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
+              -4,
+            )}`}</button>
           ) : (
             <button
               onClick={() => handleConnect()}
