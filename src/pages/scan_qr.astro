@@ -1,10 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import {Scan} from "../components/Scan.jsx";
-import QRCodeGenerator from '../components/QR'
+import QRCodeGenerator from "../components/QR";
 ---
 
 <Layout title="Scan QR">
-    <!-- <Scan client:visible /> -->
-    <QRCodeGenerator client:visible/>
+  <!-- <Scan client:visible /> -->
+  <QRCodeGenerator client:only="react" value={"Hello World"} />
 </Layout>
