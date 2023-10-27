@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { get } from "../utils/crateContract";
 import QRCode from "qrcode.react";
 import type { Crate } from "../types/types";
+import { serializeSingleCrate } from "../utils/serializeCrates";
 
 export default function CrateDetails({ id }: { id: string | undefined }) {
   const [crate, setCrate] = useState<Crate | null>(null);
@@ -9,25 +10,13 @@ export default function CrateDetails({ id }: { id: string | undefined }) {
   const [showModal, setShowModal] = useState(false);
   const [showCopyLink, setShowCopyLink] = useState(false);
 
-  function serializeCrate(input: any): Crate {
-    const crate = {
-      id: Number(input[0]),
-      title: input[1],
-      category: input[2],
-      description: input[3],
-      imageUrl: input[4],
-      owner: input[5],
-    };
-    return crate;
-  }
-
   useEffect(() => {
     async function fetchCrate() {
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length > 0) {
         const wallet = accounts[0];
         const results = await get(window.ethereum, id);
-        const serializedCrate = serializeCrate(results);
+        const serializedCrate = serializeSingleCrate(results);
         setCrate(serializedCrate);
       } else {
         window.location.replace("/");

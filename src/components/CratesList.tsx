@@ -1,25 +1,11 @@
 import { useEffect, useState } from "react";
 import { getMany } from "../utils/crateContract";
 import type { Crate } from "../types/types";
+import { serializeCrates } from "../utils/serializeCrates";
 
 export default function CratesList() {
   const [crates, setCrates] = useState<Array<Crate>>();
   const { ethereum } = window;
-
-  function serializeCrates(input: any): Array<Crate> {
-    const crates: Array<Crate> = [];
-    for (const item in input) {
-      crates.push({
-        id: Number(input[item][0]),
-        title: input[item][1],
-        category: input[item][2],
-        description: input[item][3],
-        imageUrl: input[item][4],
-        owner: input[item][5],
-      });
-    }
-    return crates;
-  }
 
   useEffect(() => {
     async function fetchCrates() {

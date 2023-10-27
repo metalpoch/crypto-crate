@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
 import { get as getCrate } from "../utils/crateContract";
 import type { Crate } from "../types/types";
+import { serializeSingleCrate } from "../utils/serializeCrates";
 
 export default function Gallery() {
   const [crates, setCrates] = useState<Array<Crate>>();
   const { ethereum } = window;
-
-  function serializeCrate(input: any): Crate {
-    const crate = {
-      id: Number(input[0]),
-      title: input[1],
-      category: input[2],
-      description: input[3],
-      imageUrl: input[4],
-      owner: input[5],
-    };
-    return crate;
-  }
 
   useEffect(() => {
     async function fetchCrates() {
@@ -25,7 +14,7 @@ export default function Gallery() {
         const crates = [];
         for (let i = 0; i < 20; i++) {
           const crate = await getCrate(window.ethereum, i);
-          const sc = serializeCrate(crate);
+          const sc = serializeSingleCrate(crate);
           if (sc.id !== 0) {
             crates.push(sc);
           }
