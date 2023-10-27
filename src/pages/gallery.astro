@@ -1,19 +1,16 @@
 ---
-import { Product } from '../components/Gallery.jsx'
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Gallery from "../components/Gallery";
 ---
 
-<Layout title='Gallery'>
-    <h1 class="text-center text-3xl font-bold my-10 bg-gradient-to-r from-purple-400 to-red-500 text-transparent bg-clip-text">Explore Gallery</h1>
-    <section class="flex flex-wrap gap-5 justify-center mb-10">
-        <!-- <Product 
-        title=' Title',
-        img='https://placehold.co/200x200',
-        userImg="https://placehold.co/50x50",
-        owner='owner'
-    /> -->
-        <Product client:visible />
-    </section>
+<Layout title="Crypto Crate - Gallery">
+  <div class="px-4 lg:px-20 my-14">
+    <div
+      class="flex justify-center items-center rounded-full bg-zinc-600 px-8 py-2 w-[200px] mb-5"
+    >
+      <p>Explore assets</p>
+    </div>
+    <h1 class="text-4xl">Gallery</h1>
+  </div>
+  <Gallery client:only="react" />
 </Layout>
-
-
