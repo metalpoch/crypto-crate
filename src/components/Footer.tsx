@@ -33,12 +33,12 @@ export default function Footer() {
           Start now by connecting with us
         </h3>
         {$currentAccount ? (
-          <button
-            onClick={() => handleConnect()}
+          <a
+            href="/mint"
             className="mb-48 px-8 py-3 rounded-full bg-purple-700 hover:bg-purple-800"
           >
             Mint Crate
-          </button>
+          </a>
         ) : (
           <button
             onClick={() => handleConnect()}

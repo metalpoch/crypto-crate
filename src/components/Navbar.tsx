@@ -39,10 +39,6 @@ export default function Navbar() {
     }
   };
 
-  // const handleRedirect = () => {
-  //   window.location.replace('/mint')
-  // }
-
   return (
     <header className="lg:px-20 lg:py-5">
       <nav className="p-8 flex justify-between items-center">
@@ -54,7 +50,7 @@ export default function Navbar() {
               className="w-10 aspect-square"
             />
             <a className="text-2xl font-bold" href="/">
-              Crypto Crates
+              Crypto Crate
             </a>
           </div>
           <input
