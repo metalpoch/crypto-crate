@@ -65,14 +65,14 @@ export default function Navbar() {
         </div>
         <div className="flex gap-x-8 items-center">
           <div className="lg:flex gap-x-10 text-lg hidden">
-            <a href="/">Explore</a>
-            <a href="/">Collections</a>
             <a href="/gallery">Gallery</a>
+            <a href="/collection">Collection</a>
+            <a href="/mint">Mint</a>
           </div>
           <div className="flex gap-x-4">
             {$currentAccount ? (
               <a
-              href="/mint"
+              href="/collection"
                 className="px-8 py-3 lg:block rounded-full bg-purple-700 hover:bg-purple-800"
               >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
                 -4
@@ -99,11 +99,11 @@ export default function Navbar() {
       </nav>
       {menuVisible && (
         <div className="bg-zinc-950 flex flex-col justify-center items-center gap-y-4 py-6 lg:hidden">
-          <a href="/">Explore</a>
-          <a href="/">Collections</a>
-          <a href="/">Gallery</a>
+          <a href="/gallery">Gallery</a>
+          <a href="/mint">Mint</a>
+          <a href="/collection">Collection</a>
           {$currentAccount ? (
-            <a href="/mint" className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
+            <a href="/collection" className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
               0,
               3
             )}...${$currentAccount.slice(-4)}`}</a>
