@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CratesList from "../components/CratesList";
+---
+
+<Layout title="Gallery">
+  <div class="px-4 lg:px-20 my-14">
+    <div
+      class="flex justify-center items-center rounded-full bg-zinc-600 px-8 py-2 w-[200px] mb-5"
+    >
+      <p>Your assets</p>
+    </div>
+    <h1 class="text-4xl">Collection</h1>
+  </div>
+  <CratesList client:only="react" />
+</Layout>

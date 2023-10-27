@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { get, getMany } from "../utils/crateContract";
+import { getMany } from "../utils/crateContract";
 
 type Crate = {
   id: number;
@@ -41,19 +41,49 @@ export default function CratesList() {
     fetchCrates();
   }, []);
 
+  function shortWallet(wallet:string){
+    return wallet.slice(0, 6) + "..."
+  }
+
   return (
-    <div>
-      <h1>crates</h1>
-      {crates &&
-        crates.map((crate) => (
-          <div key={crate.id} className="mb-2 p-5">
-            <div>id: {crate.id}</div>
-            <div>title: {crate.title}</div>
-            <div>description: {crate.description}</div>
-            <div>imageUrl: {crate.imageUrl}</div>
-            <div>owner wallet: {crate.owner}</div>
-          </div>
-        ))}
+    <div className="p-2 lg:px-40 mb-10">
+      <div className="grid lg:grid-cols-3 gap-4">
+        {crates &&
+          crates.map((crate) => (
+            <a
+              href={"/crate/" + crate.id}
+              key={crate.id}
+              className="flex flex-col flex-wrap gap-3 bg-gray-800 rounded-lg p-3 shadow-md hover:bg-gray-700"
+            >
+              <div className="flex flex-col">
+                <img
+                  className="rounded-lg w-[200px] h-[200px] object-cover shadow-sm"
+                  src={
+                    crate.imageUrl
+                      ? crate.imageUrl
+                      : "https://placehold.co/200x200"
+                  }
+                />
+              </div>
+              <h2 className="my-3 font-semibold">{crate.title}</h2>
+              <div className="flex gap-1">
+                <div className="flex">
+                  <img
+                    className="w-7 h-7 rounded-full mt-2 mr-2"
+                    src="https://placehold.co/50x50"
+                    alt="avatar"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-light text-xs text-gray-400">
+                    creator
+                  </span>
+                  <h2 className="font-semibold">{shortWallet(crate.owner)}</h2>
+                </div>
+              </div>
+            </a>
+          ))}
+      </div>
     </div>
   );
 }
