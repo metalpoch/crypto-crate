@@ -60,11 +60,13 @@ export default function Navbar() {
           />
         </div>
         <div className="flex gap-x-8 items-center">
-          <div className="lg:flex gap-x-10 text-lg hidden">
-            <a href="/gallery">Gallery</a>
-            <a href="/collection">Collection</a>
-            <a href="/mint">Mint</a>
-          </div>
+          {$currentAccount && (
+            <div className="lg:flex gap-x-10 text-lg hidden">
+              <a href="/gallery">Gallery</a>
+              <a href="/collection">Collection</a>
+              <a href="/mint">Mint</a>
+            </div>
+          )}
           <div className="flex gap-x-4">
             {$currentAccount ? (
               <a
