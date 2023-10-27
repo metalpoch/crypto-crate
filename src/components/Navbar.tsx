@@ -39,9 +39,9 @@ export default function Navbar() {
     }
   };
 
-  const handleRedirect = () => {
-    window.location.replace("/mint");
-  };
+  // const handleRedirect = () => {
+  //   window.location.replace('/mint')
+  // }
 
   return (
     <header className="lg:px-20 lg:py-5">
@@ -67,20 +67,20 @@ export default function Navbar() {
           <div className="lg:flex gap-x-10 text-lg hidden">
             <a href="/">Explore</a>
             <a href="/">Collections</a>
-            <a href="/">Gallery</a>
+            <a href="/gallery">Gallery</a>
           </div>
           <div className="flex gap-x-4">
             {$currentAccount ? (
-              <button
-                onClick={() => handleRedirect()}
-                className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
+              <a
+              href="/mint"
+                className="px-8 py-3 lg:block rounded-full bg-purple-700 hover:bg-purple-800"
               >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
-                -4,
-              )}`}</button>
+                -4
+              )}`}</a>
             ) : (
               <button
                 onClick={() => handleConnect()}
-                className="px-8 py-3 hidden lg:block rounded-full bg-blue-700 hover:bg-blue-800"
+                className="px-8 py-3 lg:block rounded-full bg-blue-700 hover:bg-blue-800"
               >
                 Connect wallet
               </button>
@@ -103,12 +103,10 @@ export default function Navbar() {
           <a href="/">Collections</a>
           <a href="/">Gallery</a>
           {$currentAccount ? (
-            <button
-              onClick={() => handleRedirect()}
-              className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
-            >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
-              -4,
-            )}`}</button>
+            <a href="/mint" className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
+              0,
+              3
+            )}...${$currentAccount.slice(-4)}`}</a>
           ) : (
             <button
               onClick={() => handleConnect()}
