@@ -23,8 +23,8 @@ export const categories = [
   { name: "Video games", value: "video-games", id: 18 },
   { name: "Home audio systems", value: "home-audio-systems", id: 19 },
   { name: "Accessories", value: "accessories", id: 20 },
-  { name: "Men's clothing", value: "men-clothing", id: 21},
-  { name: "Women's clothing", value: "men-clothing", id: 22},
-  { name: "Children's clothing", value: "men-clothing", id: 23},
-  { name: "Shoes", value: "men-clothing", id: 24},
+  { name: "Men's clothing", value: "men-clothing", id: 21 },
+  { name: "Women's clothing", value: "men-clothing", id: 22 },
+  { name: "Children's clothing", value: "men-clothing", id: 23 },
+  { name: "Shoes", value: "men-clothing", id: 24 },
 ];

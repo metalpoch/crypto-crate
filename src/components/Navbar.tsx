@@ -70,10 +70,10 @@ export default function Navbar() {
           <div className="flex gap-x-4">
             {$currentAccount ? (
               <a
-              href="/collection"
+                href="/collection"
                 className="px-8 py-3 lg:block rounded-full bg-purple-700 hover:bg-purple-800"
               >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
-                -4
+                -4,
               )}`}</a>
             ) : (
               <button
@@ -101,10 +101,12 @@ export default function Navbar() {
           <a href="/mint">Mint</a>
           <a href="/collection">Collection</a>
           {$currentAccount ? (
-            <a href="/collection" className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
-              0,
-              3
-            )}...${$currentAccount.slice(-4)}`}</a>
+            <a
+              href="/collection"
+              className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
+            >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
+              -4,
+            )}`}</a>
           ) : (
             <button
               onClick={() => handleConnect()}
