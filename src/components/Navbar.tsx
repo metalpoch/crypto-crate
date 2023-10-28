@@ -39,10 +39,6 @@ export default function Navbar() {
     }
   };
 
-  const handleRedirect = () => {
-    window.location.replace("/mint");
-  };
-
   return (
     <header className="lg:px-20 lg:py-5">
       <nav className="p-8 flex justify-between items-center">
@@ -54,7 +50,7 @@ export default function Navbar() {
               className="w-10 aspect-square"
             />
             <a className="text-2xl font-bold" href="/">
-              Crypto Crates
+              Crypto Crate
             </a>
           </div>
           <input
@@ -64,23 +60,25 @@ export default function Navbar() {
           />
         </div>
         <div className="flex gap-x-8 items-center">
-          <div className="lg:flex gap-x-10 text-lg hidden">
-            <a href="/">Explore</a>
-            <a href="/">Collections</a>
-            <a href="/">Gallery</a>
-          </div>
+          {$currentAccount && (
+            <div className="lg:flex gap-x-10 text-lg hidden">
+              <a href="/gallery">Gallery</a>
+              <a href="/collection">Collection</a>
+              <a href="/mint">Mint</a>
+            </div>
+          )}
           <div className="flex gap-x-4">
             {$currentAccount ? (
-              <button
-                onClick={() => handleRedirect()}
-                className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
+              <a
+              href="/collection"
+                className="px-8 py-3 lg:block rounded-full bg-purple-700 hover:bg-purple-800"
               >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
-                -4,
-              )}`}</button>
+                -4
+              )}`}</a>
             ) : (
               <button
                 onClick={() => handleConnect()}
-                className="px-8 py-3 hidden lg:block rounded-full bg-blue-700 hover:bg-blue-800"
+                className="px-8 py-3 lg:block rounded-full bg-blue-700 hover:bg-blue-800"
               >
                 Connect wallet
               </button>
@@ -99,16 +97,14 @@ export default function Navbar() {
       </nav>
       {menuVisible && (
         <div className="bg-zinc-950 flex flex-col justify-center items-center gap-y-4 py-6 lg:hidden">
-          <a href="/">Explore</a>
-          <a href="/">Collections</a>
-          <a href="/">Gallery</a>
+          <a href="/gallery">Gallery</a>
+          <a href="/mint">Mint</a>
+          <a href="/collection">Collection</a>
           {$currentAccount ? (
-            <button
-              onClick={() => handleRedirect()}
-              className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800"
-            >{`${$currentAccount.slice(0, 3)}...${$currentAccount.slice(
-              -4,
-            )}`}</button>
+            <a href="/collection" className="px-8 py-3 hidden lg:block rounded-full bg-purple-700 hover:bg-purple-800">{`${$currentAccount.slice(
+              0,
+              3
+            )}...${$currentAccount.slice(-4)}`}</a>
           ) : (
             <button
               onClick={() => handleConnect()}

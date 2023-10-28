@@ -3,8 +3,8 @@ import { create as createCrate } from "../utils/crateContract";
 import { useDropzone } from "react-dropzone";
 import supabase from "../utils/supabase";
 import { v4 as uuidv4 } from "uuid";
-
-// import Dropzone from "./Dropzone";
+import { categories } from "../utils/categories";
+import Modal from "./Modal";
 
 const thumbsContainer: React.CSSProperties = {
   display: "flex",
@@ -37,17 +37,31 @@ const img = {
   height: "100%",
 };
 
+interface ProviderMessage {
+  type: string;
+  data: unknown;
+}
+
+type ContractTransactionResponse = {
+  from: string;
+  hash: string;
+  to: string;
+};
+
 export default function MintForm() {
   const { ethereum } = window;
   const [wallet, setWallet] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("1");
+  const [category, setCategory] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [premium, setPremium] = useState(false);
   const [isSalable, setIsSalable] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [crate, setCrate] = useState(null);
+  const [txResponse, setTxResponse] =
+    useState<ContractTransactionResponse | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const [files, setFiles] = useState<(File & { preview: string })[]>([]);
 
@@ -93,17 +107,17 @@ export default function MintForm() {
 
         const newCrate = [
           title,
+          category,
           description,
           image.publicUrl,
-          premium,
           amount,
           isSalable,
         ];
 
         const result = await createCrate(window.ethereum, newCrate);
+        setTxResponse(result);
         console.log(result);
-        alert("Crate minted successfully");
-        setCrate(result);
+        setShowModal(true);
         clearForm();
         if (resultRef.current) {
           resultRef.current.scrollIntoView();
@@ -118,9 +132,14 @@ export default function MintForm() {
 
   function clearForm() {
     setTitle("");
+    setCategory("");
     setDescription("");
     setAmount("1");
     setFiles([]);
+  }
+
+  function handleCloseModal() {
+    setShowModal(false);
   }
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -132,8 +151,8 @@ export default function MintForm() {
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
-          }),
-        ),
+          })
+        )
       );
     },
   });
@@ -173,6 +192,27 @@ export default function MintForm() {
           </section>
         </div>
         <form className="p-8 flex flex-col lg:w-[400px]" onSubmit={handleForm}>
+          <div className="mb-4">
+            <label
+              htmlFor="categories"
+              className="block mb-2 text-sm font-medium text-white"
+            >
+              Select an option
+            </label>
+            <select
+              id="categories"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option>Choose a category</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.name}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="mb-4">
             <label
               htmlFor="title"
@@ -235,16 +275,28 @@ export default function MintForm() {
           </button>
         </form>
       </div>
-      {crate && (
-        <div className="mx-4 lg:mx-12 pb-20">
-          <h2 className="text-2xl font-bold mb-4" ref={resultRef}>
-            Transaction result:
-          </h2>
-          <div className="whitespace-pre-wrap break-words">
-            {JSON.stringify(crate, null, 4)}
+      <Modal
+        title="Transaction in progress"
+        showModal={showModal}
+        handleClose={handleCloseModal}
+      >
+        {txResponse ? (
+          <div>
+            <div className="uppercase text-zinc-500">From</div>
+            <div className="mb-3">{txResponse.from}</div>
+            <div className="uppercase text-zinc-500">Tx Hash</div>
+            <h3 className="mb-3">{txResponse.hash}</h3>
+            <a
+              href="/collection"
+              className="px-8 py-3 rounded-full bg-blue-700 hover:bg-blue-800 mt-2"
+            >
+              Go to collection
+            </a>
           </div>
-        </div>
-      )}
+        ) : (
+          <div>...</div>
+        )}
+      </Modal>
     </div>
   );
 }

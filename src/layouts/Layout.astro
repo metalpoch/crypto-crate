@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import Navbar from "../components/Navbar";
 
 interface Props {
@@ -16,10 +17,11 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
     <title>{title}</title>
   </head>
   <!-- todo: agregar una font family -->
-  <body class="bg-zinc-900 text-white">
+  <body class="bg-zinc-900 text-white min-h-screen">
     <Navbar client:only="react" />
     <slot />
   </body>

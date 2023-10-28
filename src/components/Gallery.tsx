@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getMany } from "../utils/crateContract";
+import { get as getCrate } from "../utils/crateContract";
 import type { Crate } from "../types/types";
-import { serializeCrates } from "../utils/serializeCrates";
+import { serializeSingleCrate } from "../utils/serializeCrates";
 
-export default function CratesList() {
+export default function Gallery() {
   const [crates, setCrates] = useState<Array<Crate>>();
   const { ethereum } = window;
 
@@ -11,18 +11,23 @@ export default function CratesList() {
     async function fetchCrates() {
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length > 0) {
-        const wallet = accounts[0];
-        const results = await getMany(window.ethereum, wallet);
-        const serializedCrates = serializeCrates({ ...results });
-        setCrates(serializedCrates);
+        const crates = [];
+        for (let i = 0; i < 20; i++) {
+          const crate = await getCrate(window.ethereum, i);
+          const sc = serializeSingleCrate(crate);
+          if (sc.id !== 0) {
+            crates.push(sc);
+          }
+        }
+        setCrates(crates);
       }
     }
 
     fetchCrates();
   }, []);
 
-  function shortWallet(wallet:string){
-    return wallet.slice(0, 6) + "..."
+  function shortWallet(wallet: string) {
+    return wallet.slice(0, 6) + "...";
   }
 
   return (
