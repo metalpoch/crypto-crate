@@ -21,8 +21,8 @@ export default function CratesList() {
     fetchCrates();
   }, []);
 
-  function shortWallet(wallet:string){
-    return wallet.slice(0, 6) + "..."
+  function shortWallet(wallet: string) {
+    return wallet.slice(0, 6) + "...";
   }
 
   return (
