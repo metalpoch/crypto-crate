@@ -5,4 +5,4 @@ export type Crate = {
   description: string;
   imageUrl: string;
   owner: string;
-}
+};
